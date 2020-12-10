@@ -1035,16 +1035,8 @@ namespace System.DirectoryServices.Protocols
 
         public SecurityIdentifier QuerySid
         {
-            get
-            {
-                return _sid == null ? null :
-#if TARGET_WINDOWS
-                    new SecurityIdentifier(_sid, 0);
-#else
-                    null;
-#endif
-        }
-        set
+            get => _sid == null ? null : new SecurityIdentifier(_sid, 0);
+            set
             {
                 if (value == null)
                 {
@@ -1052,10 +1044,8 @@ namespace System.DirectoryServices.Protocols
                 }
                 else
                 {
-#if TARGET_WINDOWS
                     _sid = new byte[value.BinaryLength];
                     value.GetBinaryForm(_sid, 0);
-#endif
                 }
             }
         }
