@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http
 {
-    public class HttpMessageInvoker : IDisposable
+    public partial class HttpMessageInvoker : IDisposable
     {
         private volatile bool _disposed;
         private readonly bool _disposeHandler;
@@ -31,40 +31,6 @@ namespace System.Net.Http
 
             _handler = handler;
             _disposeHandler = disposeHandler;
-        }
-
-        [UnsupportedOSPlatformAttribute("browser")]
-        public virtual HttpResponseMessage Send(HttpRequestMessage request,
-            CancellationToken cancellationToken)
-        {
-            if (request == null)
-            {
-                throw new ArgumentNullException(nameof(request));
-            }
-            CheckDisposed();
-
-            if (HttpTelemetry.Log.IsEnabled() && !request.WasSentByHttpClient() && request.RequestUri != null)
-            {
-                HttpTelemetry.Log.RequestStart(request);
-
-                try
-                {
-                    return _handler.Send(request, cancellationToken);
-                }
-                catch when (LogRequestFailed(telemetryStarted: true))
-                {
-                    // Unreachable as LogRequestFailed will return false
-                    throw;
-                }
-                finally
-                {
-                    HttpTelemetry.Log.RequestStop();
-                }
-            }
-            else
-            {
-                return _handler.Send(request, cancellationToken);
-            }
         }
 
         public virtual Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,

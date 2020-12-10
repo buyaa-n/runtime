@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Http
 {
-    public class HttpClient : HttpMessageInvoker
+    public partial class HttpClient : HttpMessageInvoker
     {
         #region Fields
 
@@ -439,30 +439,6 @@ namespace System.Net.Http
         #endregion REST Send Overloads
 
         #region Advanced Send Overloads
-
-        [UnsupportedOSPlatform("browser")]
-        public HttpResponseMessage Send(HttpRequestMessage request) =>
-            Send(request, DefaultCompletionOption, cancellationToken: default);
-
-        [UnsupportedOSPlatform("browser")]
-        public HttpResponseMessage Send(HttpRequestMessage request, HttpCompletionOption completionOption) =>
-            Send(request, completionOption, cancellationToken: default);
-
-        [UnsupportedOSPlatform("browser")]
-        public override HttpResponseMessage Send(HttpRequestMessage request, CancellationToken cancellationToken) =>
-            Send(request, DefaultCompletionOption, cancellationToken);
-
-        [UnsupportedOSPlatform("browser")]
-        public HttpResponseMessage Send(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
-        {
-            // Called outside of async state machine to propagate certain exception even without awaiting the returned task.
-            CheckRequestBeforeSend(request);
-
-            (CancellationTokenSource cts, bool disposeCts, CancellationTokenSource pendingRequestsCts) = PrepareCancellationTokenSource(cancellationToken);
-            ValueTask<HttpResponseMessage> sendTask = SendAsyncCore(request, completionOption, async: false, cts, disposeCts, pendingRequestsCts, cancellationToken);
-            Debug.Assert(sendTask.IsCompleted);
-            return sendTask.GetAwaiter().GetResult();
-        }
 
         public Task<HttpResponseMessage> SendAsync(HttpRequestMessage request) =>
             SendAsync(request, DefaultCompletionOption, CancellationToken.None);
