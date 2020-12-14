@@ -98,6 +98,9 @@ namespace System
 
         public static void Beep(int frequency, int duration) => throw new PlatformNotSupportedException();
 
+        public static void MoveBufferArea(int sourceLeft, int sourceTop, int sourceWidth,
+            int sourceHeight, int targetLeft, int targetTop) => throw new NotImplementedException();
+
         public static void MoveBufferArea(int sourceLeft, int sourceTop,
             int sourceWidth, int sourceHeight, int targetLeft, int targetTop,
             char sourceChar, ConsoleColor sourceForeColor,

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <TargetFrameworks>$(NetCoreAppCurrent)-windows;$(NetCoreAppCurrent)-Unix;$(NetCoreAppCurrent)-Android;$(NetCoreAppCurrent)-iOS;$(NetCoreAppCurrent)-tvOS;$(NetCoreAppCurrent)-Browser</TargetFrameworks>
@@ -6,6 +6,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="System\Console.cs" />
+    <Compile Include="System\Console.NonBrowser.cs" Condition="'$(TargetsBrowser)' != 'true'"/>
     <Compile Include="System\ConsoleCancelEventArgs.cs" />
     <Compile Include="System\ConsoleColor.cs" />
     <Compile Include="System\ConsoleSpecialKey.cs" />
@@ -38,6 +39,7 @@
   </ItemGroup>
   <!-- WebAssembly -->
   <ItemGroup Condition="'$(TargetsBrowser)' == 'true'">
+    <Compile Include="System\Console.Browser.cs" />
     <Compile Include="System\ConsolePal.WebAssembly.cs" />
     <Compile Include="$(CommonPath)Interop\Unix\System.Native\Interop.Dup.cs"
              Link="Common\Interop\Unix\Interop.Dup.cs" />
