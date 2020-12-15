@@ -9311,14 +9311,16 @@ void Compiler::fgAddInternal()
     }
     else
     {
+        bool stressMerging = compStressCompile(STRESS_MERGED_RETURNS, 50);
+
         //
         // We are allowed to have multiple individual exits
         // However we can still decide to have a single return
         //
-        if (compCodeOpt() == SMALL_CODE)
+        if ((compCodeOpt() == SMALL_CODE) || stressMerging)
         {
-            // For the Small_Code case we always generate a
-            // single return block when we have multiple
+            // Under stress or for Small_Code case we always
+            // generate a single return block when we have multiple
             // return points
             //
             merger.SetMaxReturns(1);
@@ -23495,6 +23497,7 @@ void Compiler::fgInvokeInlineeCompiler(GenTreeCall* call, InlineResult* inlineRe
                 compileFlagsForInlinee.Clear(JitFlags::JIT_FLAG_PROF_ENTERLEAVE);
                 compileFlagsForInlinee.Clear(JitFlags::JIT_FLAG_DEBUG_EnC);
                 compileFlagsForInlinee.Clear(JitFlags::JIT_FLAG_DEBUG_INFO);
+                compileFlagsForInlinee.Clear(JitFlags::JIT_FLAG_REVERSE_PINVOKE);
 
                 compileFlagsForInlinee.Set(JitFlags::JIT_FLAG_SKIP_VERIFICATION);
 
