@@ -10,9 +10,6 @@ namespace System.Net.Http
     {
         [UnsupportedOSPlatform("browser")]
         public virtual HttpResponseMessage Send(HttpRequestMessage request,
-            CancellationToken cancellationToken)
-        {
-            throw new PlatformNotSupportedException();
-        }
+            CancellationToken cancellationToken) => throw new PlatformNotSupportedException();
     }
 }

@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net.Http.Headers;
-using System.Runtime.Versioning;
 using System.Threading;
 using System.Threading.Tasks;
 

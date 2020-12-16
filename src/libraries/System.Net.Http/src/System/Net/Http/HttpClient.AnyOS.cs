@@ -10,7 +10,6 @@ namespace System.Net.Http
 {
     public partial class HttpClient
     {
-
         [UnsupportedOSPlatform("browser")]
         public HttpResponseMessage Send(HttpRequestMessage request) =>
             Send(request, DefaultCompletionOption, cancellationToken: default);

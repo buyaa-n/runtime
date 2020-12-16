@@ -6,17 +6,16 @@ using System.Runtime.Versioning;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
-using HttpHandlerType = System.Net.Http.BrowserHttpHandler;
 
 namespace System.Net.Http
 {
     public partial class HttpClientHandler
     {
-        private readonly HttpHandlerType _underlyingHandler;
+        private readonly BrowserHttpHandler _underlyingHandler;
 
         public HttpClientHandler()
         {
-            _underlyingHandler = new HttpHandlerType();
+            _underlyingHandler = new BrowserHttpHandler();
             if (DiagnosticsHandler.IsGloballyEnabled())
             {
                 _diagnosticsHandler = new DiagnosticsHandler(_underlyingHandler);
@@ -24,9 +23,9 @@ namespace System.Net.Http
             ClientCertificateOptions = ClientCertificateOption.Manual;
         }
 
-        public virtual bool SupportsAutomaticDecompression => HttpHandlerType.SupportsAutomaticDecompression;
-        public virtual bool SupportsProxy => HttpHandlerType.SupportsProxy;
-        public virtual bool SupportsRedirectConfiguration => HttpHandlerType.SupportsRedirectConfiguration;
+        public virtual bool SupportsAutomaticDecompression => BrowserHttpHandler.SupportsAutomaticDecompression;
+        public virtual bool SupportsProxy => BrowserHttpHandler.SupportsProxy;
+        public virtual bool SupportsRedirectConfiguration => BrowserHttpHandler.SupportsRedirectConfiguration;
 
         [UnsupportedOSPlatform("browser")]
         public bool UseCookies
@@ -158,11 +157,11 @@ namespace System.Net.Http
         }
 
         [UnsupportedOSPlatform("browser")]
-        protected internal override HttpResponseMessage Send(HttpRequestMessage request, CancellationToken cancellationToken)
-            => throw new PlatformNotSupportedException();
+        protected internal override HttpResponseMessage Send(HttpRequestMessage request, CancellationToken cancellationToken) =>
+            throw new PlatformNotSupportedException();
 
         [UnsupportedOSPlatform("browser")]
-        public static Func<HttpRequestMessage, X509Certificate2?, X509Chain?, SslPolicyErrors, bool> DangerousAcceptAnyServerCertificateValidator
-            => throw new PlatformNotSupportedException();
+        public static Func<HttpRequestMessage, X509Certificate2?, X509Chain?, SslPolicyErrors, bool> DangerousAcceptAnyServerCertificateValidator =>
+            throw new PlatformNotSupportedException();
     }
 }

@@ -8,20 +8,19 @@ namespace System.Net.Http
 {
     public partial class HttpClient
     {
-
         [UnsupportedOSPlatform("browser")]
         public HttpResponseMessage Send(HttpRequestMessage request) => throw new PlatformNotSupportedException();
 
         [UnsupportedOSPlatform("browser")]
         public HttpResponseMessage Send(HttpRequestMessage request, HttpCompletionOption completionOption) =>
-             throw new PlatformNotSupportedException();
+            throw new PlatformNotSupportedException();
 
         [UnsupportedOSPlatform("browser")]
         public override HttpResponseMessage Send(HttpRequestMessage request, CancellationToken cancellationToken) =>
-             throw new PlatformNotSupportedException();
+            throw new PlatformNotSupportedException();
 
         [UnsupportedOSPlatform("browser")]
         public HttpResponseMessage Send(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken) =>
-         throw new PlatformNotSupportedException();
+            throw new PlatformNotSupportedException();
     }
 }

@@ -6,13 +6,12 @@ using System.Runtime.Versioning;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
-using HttpHandlerType = System.Net.Http.SocketsHttpHandler;
 
 namespace System.Net.Http
 {
     public partial class HttpClientHandler
     {
-        private readonly HttpHandlerType _underlyingHandler;
+        private readonly SocketsHttpHandler _underlyingHandler;
 
         public HttpClientHandler()
         {
@@ -24,9 +23,9 @@ namespace System.Net.Http
             ClientCertificateOptions = ClientCertificateOption.Manual;
         }
 
-        public virtual bool SupportsAutomaticDecompression => HttpHandlerType.SupportsAutomaticDecompression;
-        public virtual bool SupportsProxy => HttpHandlerType.SupportsProxy;
-        public virtual bool SupportsRedirectConfiguration => HttpHandlerType.SupportsRedirectConfiguration;
+        public virtual bool SupportsAutomaticDecompression => SocketsHttpHandler.SupportsAutomaticDecompression;
+        public virtual bool SupportsProxy => SocketsHttpHandler.SupportsProxy;
+        public virtual bool SupportsRedirectConfiguration => SocketsHttpHandler.SupportsRedirectConfiguration;
 
         [UnsupportedOSPlatform("browser")]
         public bool UseCookies
