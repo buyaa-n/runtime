@@ -3,23 +3,16 @@
 
 using System.Buffers;
 using System.Runtime.InteropServices;
-using System.Runtime.Versioning;
 
 namespace System.Security.Cryptography
 {
-    public abstract class RandomNumberGenerator : IDisposable
+    public abstract partial class RandomNumberGenerator : IDisposable
     {
         protected RandomNumberGenerator() { }
 
         public static RandomNumberGenerator Create()
         {
             return new RandomNumberGeneratorImplementation();
-        }
-
-        [UnsupportedOSPlatform("browser")]
-        public static RandomNumberGenerator? Create(string rngName)
-        {
-            return (RandomNumberGenerator?)CryptoConfig.CreateFromName(rngName);
         }
 
         public void Dispose()

@@ -165,8 +165,8 @@
 
   </Target>
 
-  <!-- Removes assembly level attributes for Browser. -->
-  <Target Name="RemoveSupportedPlatformAssemblyAttributeForBrowser" AfterTargets="GetAssemblyAttributes" Condition="'$(TargetFrameworkSuffix)' == 'Browser' or '$(IsTestProject)' == 'true'">
+  <!-- Removes assembly level TFM attributes from Test projects. -->
+  <Target Name="RemoveSupportedPlatformAssemblyAttributeForBrowser" AfterTargets="GetAssemblyAttributes" Condition="'$(IsTestProject)' == 'true'">
     <ItemGroup>
       <AssemblyAttribute Remove="System.Runtime.Versioning.SupportedOSPlatformAttribute" />
       <AssemblyAttribute Remove="System.Runtime.Versioning.TargetPlatformAttribute" />
