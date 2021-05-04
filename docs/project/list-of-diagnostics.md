@@ -66,6 +66,8 @@ The PR that reveals the implementation of the `<IncludeInternalObsoleteAttribute
 |  __`SYSLIB0014`__ | WebRequest, HttpWebRequest, ServicePoint, and WebClient are obsolete. Use HttpClient instead. |
 |  __`SYSLIB0015`__ | DisablePrivateReflectionAttribute has no effect in .NET 6.0+ applications. |
 |  __`SYSLIB0016`__ | Use the Graphics.GetContextInfo overloads that accept arguments for better performance and fewer allocations. |
+|  __`SYSLIB0017`__ | Strong name signing is not supported and throws PlatformNotSupportedException. |
+|  __`SYSLIB0018`__ | ReflectionOnly loading is not supported and throws PlatformNotSupportedException. |
 |  __`SYSLIB0019`__ | RuntimeEnvironment members SystemConfigurationFile, GetRuntimeInterfaceAsIntPtr, and GetRuntimeInterfaceAsObject are no longer supported and throw PlatformNotSupportedException. |
 |  __`SYSLIB0020`__ | JsonSerializerOptions.IgnoreNullValues is obsolete. To ignore null values when serializing, set DefaultIgnoreCondition to JsonIgnoreCondition.WhenWritingNull. |
 
@@ -106,3 +108,13 @@ The diagnostic id values reserved for .NET Libraries analyzer warnings are `SYSL
 |  __`SYSLIB1027`__ | *_`SYSLIB1024`-`SYSLIB1029` reserved for logging._* |
 |  __`SYSLIB1028`__ | *_`SYSLIB1024`-`SYSLIB1029` reserved for logging._* |
 |  __`SYSLIB1029`__ | *_`SYSLIB1024`-`SYSLIB1029` reserved for logging._* |
+|  __`SYSLIB1030`__ | [System.Text.Json.SourceGeneration] Did not generate serialization metadata for type. |
+|  __`SYSLIB1031`__ | [System.Text.Json.SourceGeneration] Duplicate type name. |
+|  __`SYSLIB1032`__ | *_`SYSLIB1032`-`SYSLIB1039` reserved for System.Text.Json.SourceGeneration._* |
+|  __`SYSLIB1033`__ | *_`SYSLIB1032`-`SYSLIB1039` reserved for System.Text.Json.SourceGeneration._* |
+|  __`SYSLIB1034`__ | *_`SYSLIB1032`-`SYSLIB1039` reserved for System.Text.Json.SourceGeneration._* |
+|  __`SYSLIB1035`__ | *_`SYSLIB1032`-`SYSLIB1039` reserved for System.Text.Json.SourceGeneration._* |
+|  __`SYSLIB1036`__ | *_`SYSLIB1032`-`SYSLIB1039` reserved for System.Text.Json.SourceGeneration._* |
+|  __`SYSLIB1037`__ | *_`SYSLIB1032`-`SYSLIB1039` reserved for System.Text.Json.SourceGeneration._* |
+|  __`SYSLIB1038`__ | *_`SYSLIB1032`-`SYSLIB1039` reserved for System.Text.Json.SourceGeneration._* |
+|  __`SYSLIB1039`__ | *_`SYSLIB1032`-`SYSLIB1039` reserved for System.Text.Json.SourceGeneration._* |
