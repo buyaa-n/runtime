@@ -67,45 +67,45 @@ namespace System.Buffers.Text
 
         internal interface IBase64Encoder<T> where T : unmanaged
         {
-            static abstract ReadOnlySpan<byte> EncodingMap { get; }
-            static abstract sbyte Avx2LutChar62 { get; }
-            static abstract sbyte Avx2LutChar63 { get; }
-            static abstract ReadOnlySpan<byte> AdvSimdLut4 { get; }
-            static abstract uint Ssse3AdvSimdLutE3 { get; }
-            static abstract int GetMaxSrcLength(int srcLength, int destLength);
-            static abstract int GetMaxEncodedLength(int srcLength);
-            static abstract uint GetInPlaceDestinationLength(int encodedLength, int leftOver);
-            static abstract unsafe void EncodeOneOptionallyPadTwo(byte* oneByte, T* dest, ref byte encodingMap);
-            static abstract unsafe void EncodeTwoOptionallyPadOne(byte* oneByte, T* dest, ref byte encodingMap);
-            static abstract unsafe void EncodeThreeAndWrite(byte* threeBytes, T* destination, ref byte encodingMap);
-            static abstract int IncrementPadTwo { get; }
-            static abstract int IncrementPadOne { get; }
-            static abstract unsafe void StoreVector512ToDestination(T* dest, T* destStart, int destLength, Vector512<byte> str);
-            static abstract unsafe void StoreVector256ToDestination(T* dest, T* destStart, int destLength, Vector256<byte> str);
-            static abstract unsafe void StoreVector128ToDestination(T* dest, T* destStart, int destLength, Vector128<byte> str);
-            static abstract unsafe void StoreArmVector128x4ToDestination(T* dest, T* destStart, int destLength, Vector128<byte> res1,
+            ReadOnlySpan<byte> EncodingMap { get; }
+            sbyte Avx2LutChar62 { get; }
+            sbyte Avx2LutChar63 { get; }
+             ReadOnlySpan<byte> AdvSimdLut4 { get; }
+            uint Ssse3AdvSimdLutE3 { get; }
+            int GetMaxSrcLength(int srcLength, int destLength);
+            int GetMaxEncodedLength(int srcLength);
+            uint GetInPlaceDestinationLength(int encodedLength, int leftOver);
+            unsafe void EncodeOneOptionallyPadTwo(byte* oneByte, T* dest, ref byte encodingMap);
+            unsafe void EncodeTwoOptionallyPadOne(byte* oneByte, T* dest, ref byte encodingMap);
+            unsafe void EncodeThreeAndWrite(byte* threeBytes, T* destination, ref byte encodingMap);
+            int IncrementPadTwo { get; }
+            int IncrementPadOne { get; }
+            unsafe void StoreVector512ToDestination(T* dest, T* destStart, int destLength, Vector512<byte> str);
+            unsafe void StoreVector256ToDestination(T* dest, T* destStart, int destLength, Vector256<byte> str);
+            unsafe void StoreVector128ToDestination(T* dest, T* destStart, int destLength, Vector128<byte> str);
+            unsafe void StoreArmVector128x4ToDestination(T* dest, T* destStart, int destLength, Vector128<byte> res1,
                 Vector128<byte> res2, Vector128<byte> res3, Vector128<byte> res4);
         }
 
         internal interface IBase64Decoder<T> where T : unmanaged
         {
-            static abstract ReadOnlySpan<sbyte> DecodingMap { get; }
-            static abstract ReadOnlySpan<uint> VbmiLookup0 { get; }
-            static abstract ReadOnlySpan<uint> VbmiLookup1 { get; }
-            static abstract ReadOnlySpan<sbyte> Avx2LutHigh { get; }
-            static abstract ReadOnlySpan<sbyte> Avx2LutLow { get; }
-            static abstract ReadOnlySpan<sbyte> Avx2LutShift { get; }
-            static abstract byte MaskSlashOrUnderscore { get; }
-            static abstract ReadOnlySpan<int> Vector128LutHigh { get; }
-            static abstract ReadOnlySpan<int> Vector128LutLow { get; }
-            static abstract ReadOnlySpan<uint> Vector128LutShift { get; }
-            static abstract ReadOnlySpan<uint> AdvSimdLutOne3 { get; }
-            static abstract uint AdvSimdLutTwo3Uint1 { get; }
-            static abstract int SrcLength(bool isFinalBlock, int sourceLength);
-            static abstract int GetMaxDecodedLength(int sourceLength);
-            static abstract bool IsInvalidLength(int bufferLength);
-            static abstract bool IsValidPadding(uint padChar);
-            static abstract bool TryDecode128Core(
+            ReadOnlySpan<sbyte> DecodingMap { get; }
+            ReadOnlySpan<uint> VbmiLookup0 { get; }
+            ReadOnlySpan<uint> VbmiLookup1 { get; }
+            ReadOnlySpan<sbyte> Avx2LutHigh { get; }
+            ReadOnlySpan<sbyte> Avx2LutLow { get; }
+            ReadOnlySpan<sbyte> Avx2LutShift { get; }
+            byte MaskSlashOrUnderscore { get; }
+            ReadOnlySpan<int> Vector128LutHigh { get; }
+            ReadOnlySpan<int> Vector128LutLow { get; }
+            ReadOnlySpan<uint> Vector128LutShift { get; }
+            ReadOnlySpan<uint> AdvSimdLutOne3 { get; }
+            uint AdvSimdLutTwo3Uint1 { get; }
+            int SrcLength(bool isFinalBlock, int sourceLength);
+            int GetMaxDecodedLength(int sourceLength);
+            bool IsInvalidLength(int bufferLength);
+            bool IsValidPadding(uint padChar);
+            bool TryDecode128Core(
                 Vector128<byte> str,
                 Vector128<byte> hiNibbles,
                 Vector128<byte> maskSlashOrUnderscore,
@@ -115,7 +115,7 @@ namespace System.Buffers.Text
                 Vector128<sbyte> lutShift,
                 Vector128<byte> shiftForUnderscore,
                 out Vector128<byte> result);
-            static abstract bool TryDecode256Core(
+            bool TryDecode256Core(
                 Vector256<sbyte> str,
                 Vector256<sbyte> hiNibbles,
                 Vector256<sbyte> maskSlashOrUnderscore,
@@ -124,16 +124,15 @@ namespace System.Buffers.Text
                 Vector256<sbyte> lutShift,
                 Vector256<sbyte> shiftForUnderscore,
                 out Vector256<sbyte> result);
-            static abstract unsafe int DecodeFourElements(T* source, ref sbyte decodingMap);
-            static abstract unsafe int DecodeRemaining(T* srcEnd, ref sbyte decodingMap, long remaining, out uint t2, out uint t3);
-            static abstract int IndexOfAnyExceptWhiteSpace(ReadOnlySpan<T> span);
-            static abstract OperationStatus DecodeWithWhiteSpaceBlockwiseWrapper<TTBase64Decoder>(ReadOnlySpan<T> source,
-                Span<byte> bytes, ref int bytesConsumed, ref int bytesWritten, bool isFinalBlock = true)
-                where TTBase64Decoder : IBase64Decoder<T>;
-            static abstract unsafe bool TryLoadVector512(T* src, T* srcStart, int sourceLength, out Vector512<sbyte> str);
-            static abstract unsafe bool TryLoadAvxVector256(T* src, T* srcStart, int sourceLength, out Vector256<sbyte> str);
-            static abstract unsafe bool TryLoadVector128(T* src, T* srcStart, int sourceLength, out Vector128<byte> str);
-            static abstract unsafe bool TryLoadArmVector128x4(T* src, T* srcStart, int sourceLength,
+            unsafe int DecodeFourElements(T* source, ref sbyte decodingMap);
+            unsafe int DecodeRemaining(T* srcEnd, ref sbyte decodingMap, long remaining, out uint t2, out uint t3);
+            int IndexOfAnyExceptWhiteSpace(ReadOnlySpan<T> span);
+            OperationStatus DecodeWithWhiteSpaceBlockwiseWrapper(IBase64Decoder<T> decoder, ReadOnlySpan<T> source,
+                Span<byte> bytes, ref int bytesConsumed, ref int bytesWritten, bool isFinalBlock = true);
+            unsafe bool TryLoadVector512(T* src, T* srcStart, int sourceLength, out Vector512<sbyte> str);
+            unsafe bool TryLoadAvxVector256(T* src, T* srcStart, int sourceLength, out Vector256<sbyte> str);
+            unsafe bool TryLoadVector128(T* src, T* srcStart, int sourceLength, out Vector128<byte> str);
+            unsafe bool TryLoadArmVector128x4(T* src, T* srcStart, int sourceLength,
                 out Vector128<byte> str1, out Vector128<byte> str2, out Vector128<byte> str3, out Vector128<byte> str4);
         }
     }

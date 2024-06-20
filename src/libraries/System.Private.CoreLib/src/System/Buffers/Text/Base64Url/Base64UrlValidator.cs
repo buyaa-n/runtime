@@ -67,7 +67,7 @@ namespace System.Buffers.Text
 
         private readonly struct Base64UrlByteValidatable : Base64.IBase64Validatable<byte>
         {
-            private static readonly SearchValues<byte> s_validBase64UrlChars = SearchValues.Create(Base64UrlEncoderByte.EncodingMap);
+            private static readonly SearchValues<byte> s_validBase64UrlChars = SearchValues.Create(s_base64UrlByteEncoder.EncodingMap);
 
             public static int IndexOfAnyExcept(ReadOnlySpan<byte> span) => span.IndexOfAnyExcept(s_validBase64UrlChars);
             public static bool IsWhiteSpace(byte value) => Base64.IsWhiteSpace(value);
